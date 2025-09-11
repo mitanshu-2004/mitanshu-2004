@@ -38,14 +38,6 @@ I enjoy building systems that connect hardware and software — from intelligent
 
 ---
 
-## Featured Projects
-
-- **[Hexapod](https://github.com/atom-robotics-lab/Hexapod)**: A Python & ROS project simulating a six-legged robot.  
-- **[Memory Assistant](https://github.com/mitanshu-2004/memory-assistant)**: A TypeScript AI chatbot (Node.js, GPT) for storing and recalling personal notes.  
-- **[Stock Influence](https://github.com/mitanshu-2004/Stock-Influence)**: A Python machine learning tool analyzing stock market trends with financial data.  
-- **[Portfolio](https://github.com/mitanshu-2004/portfolio)**: A personal website built with React and modern web technologies.  
-
----
 
 ## GitHub Stats
 
