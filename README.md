@@ -9,9 +9,8 @@
 
 ## About Me
 
-I’m **Mitanshu Goel**, a software engineer based in Delhi, India.  
-I work at the intersection of **robotics, artificial intelligence, and full-stack development**.  
-I enjoy building systems that connect hardware and software — from intelligent robots and IoT devices to AI-powered platforms and web applications.
+I’m **Mitanshu Goel**, a software engineer based in Delhi, India.   
+I enjoy building systems that connect hardware and software.
 
 ---
 
