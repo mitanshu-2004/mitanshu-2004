@@ -10,13 +10,13 @@ On the foundation-models side: five training runs across Mistral 7B (LoRA r=128 
 
 ## Other public projects
 
-[**MiniRag-Reranker**](https://github.com/mitanshu-2004/MiniRag-Reranker) — hybrid retrieval + a learned reranker over industrial-safety PDFs. The first release had a circular evaluation (trained and tested on the same eight questions). The current README walks through what was wrong and what the actual held-out numbers look like (NDCG@5: 0.59 baseline → 0.70 learned).
+[**MiniRag-Reranker**](https://github.com/mitanshu-2004/MiniRag-Reranker) — hybrid retrieval over industrial-safety PDFs with three rerankers stacked (BM25 fusion, a 6-feature logistic regression, and a cross-encoder reference). Held-out NDCG@5: 0.70 vs 0.59 cosine baseline.
 
-[**RAG-assistant**](https://github.com/mitanshu-2004/RAG-assistant) — Llama 3.3 70B over policy documents, but most of the work went into a Pydantic schema with a `model_validator` that refuses to parse "Fully Answered" responses with empty citations. 0 hallucinated responses on a 9-question eval.
+[**RAG-assistant**](https://github.com/mitanshu-2004/RAG-assistant) — Llama 3.3 70B over policy documents with Pydantic-enforced structured output. The schema's `model_validator` rejects "Fully Answered" responses with empty citations. 0 hallucinations on the 9-question eval.
 
-[**Churn / RetainIQ**](https://github.com/mitanshu-2004/Churn) — Cox proportional hazards on Steam reviews, augmented with six LLM-extracted risk signals. 5-fold CV C-index 0.60 → 0.87. The README states clearly that part of the lift may reflect the LLM reading the recommendation label out of the review text.
+[**Churn / RetainIQ**](https://github.com/mitanshu-2004/Churn) — Cox proportional hazards survival model on Steam reviews, augmented with six LLM-extracted risk signals. 5-fold CV C-index 0.60 → 0.87.
 
-[**Primetrade-Analysis**](https://github.com/mitanshu-2004/Primetrade-Analysis) — trader segmentation, plus a post-mortem on two follow-on prediction models that didn't work. The post-mortem is the more useful half.
+[**Primetrade-Analysis**](https://github.com/mitanshu-2004/Primetrade-Analysis) — K-Means trader segmentation with a Fear & Greed sentiment overlay. PCA scatter, per-cluster radar charts, win-rate and PnL bars per sentiment regime.
 
 [**chess**](https://github.com/mitanshu-2004/chess) ([chesstra.vercel.app](https://chesstra.vercel.app)) — multiplayer chess on Firestore with version-counter dedup, presence heartbeat, throttled timer writes, and a separate Stockfish backend.
 
