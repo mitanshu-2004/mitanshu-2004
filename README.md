@@ -1,29 +1,51 @@
+<!--
+  GITHUB PROFILE README (paste-ready)
+  ===================================
+  Where this goes: the special repo github.com/mitanshu-2004/mitanshu-2004
+  (same name as your username). Put this content in its README.md, on the
+  default branch. It renders at the top of your GitHub profile.
+
+  Recommended pinned repos (set these in the GitHub UI: profile > Customize your pins).
+  These are your strongest, non-liability repos:
+    1. atom-robotics-lab/Hexapod   (your ros2_control + URDF work)
+    2. RAG-assistant               (Pydantic-guarded, 0 hallucinations)
+    3. MiniRag-Reranker            (held-out eval after catching leakage)
+    4. llm-survival-churn          (leakage decomposition)
+    5. chess                       (live multiplayer, chesstra.vercel.app)
+    6. Stock-Influence             (deployed full-stack, live demo)
+  Avoid pinning StockMetrics or memory-assistant as headline proof (known caveats).
+
+  Everything below this comment is the README. Delete this comment block if you want.
+-->
+
 # Mitanshu Goel
 
-Final-year ECE at MAIT Delhi, graduating June 2026. Currently writing a real-time C++17 control loop for a bimanual VR teleoperation rig at Variety Innovation / Enferent.ai — Meta Quest 3 driving two Elite Robots CS66 industrial arms, with `SCHED_FIFO` scheduling and `mlockall` to keep the loop deterministic.
+Robotics and Physical AI engineer. ECE new-grad from MAIT Delhi (2026). Most of my work sits where hardware meets learned models, with a habit underneath all of it: build the eval before you trust the number.
 
-Two strands of work I keep coming back to: real-time robotics on industrial hardware, and continued-pretraining of small foundation models on data I scraped myself.
+Right now I am at **nFerent.ai**, building a bimanual VR teleoperation rig. A Meta Quest 3 drives a pair of Elite Robots CS66 arms through a real-time C++ control loop, and the same loop extends to a Franka Research 3 so it covers both arm families. The rig also collects the data it runs on: every session logs synchronised arm state, headset pose, and multi-camera capture that downstream imitation-learning policies train on.
 
-On the robotics side: an 18-DoF [Hexapod](https://github.com/atom-robotics-lab/Hexapod) at the lab I'm in (atom-robotics-lab @ MAIT) — I own the URDF, the 305-line `ros2_control` hardware interface, and the Gazebo Classic → Ignition Fortress migration. The analytic IK is my collaborator Akshat's work. Now extending the same skill set into bimanual teleop on industrial arms at Enferent.
+## What I work on
 
-On the foundation-models side: five training runs across Mistral 7B (LoRA r=128 and r=256), Qwen 2.5 (3B at r=16 and 7B at r=128), and a from-scratch nanoGPT, all on a self-scraped Reddit corpus. Adapters and configs are on [huggingface.co/mitanshugoel](https://huggingface.co/mitanshugoel). The choices that show up across the scripts — embedding LR 5–10× smaller than the main LR, `lm_head` and `embed_tokens` in `target_modules`, `use_rslora=True` at high ranks — are CPT-specific decisions, not tutorial defaults.
+- **Real-time robotics.** C++ control loops on industrial arms, ROS 2 and ros2_control, MoveIt, Cartesian servoing, teleoperation safety stacks, inverse kinematics.
+- **Robot learning data.** Multi-sensor capture synchronised on one hardware clock, with watchdogs that catch the quiet failures (a camera silently repeating a frame under load).
+- **Foundation models.** Six continued-pretraining runs on a Reddit corpus I scraped and processed myself: Mistral 7B at two ranks, Qwen 2.5 at three scales, and a nanoGPT built from scratch.
+- **Applied ML and LLMs.** Retrieval with held-out evaluation, Pydantic-guarded grounded Q&A, survival analysis, and a few honest failure write-ups.
 
-## Other public projects
+## Selected projects
 
-[**MiniRag-Reranker**](https://github.com/mitanshu-2004/MiniRag-Reranker) — hybrid retrieval over industrial-safety PDFs with three rerankers stacked (BM25 fusion, a 6-feature logistic regression, and a cross-encoder reference). Held-out NDCG@5: 0.70 vs 0.59 cosine baseline.
+- **Bimanual VR teleoperation (nFerent.ai)** is a real-time C++ stack that drives two Elite CS66 arms, extended to a Franka FR3, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. Company work, no public repo.
+- **[Hexapod](https://github.com/atom-robotics-lab/Hexapod)** is an 18-DoF hexapod in ROS 2 and Gazebo. I wrote the URDF xacro and the full ros2_control hardware interface. The gait and analytic IK were a teammate's.
+- **[RAG-assistant](https://github.com/mitanshu-2004/RAG-assistant)** is grounded policy Q&A where a Pydantic validator rejects "Fully Answered" replies that have no citations, at parse time. It returned 0 hallucinations on a 9-question held-out rubric.
+- **[MiniRag-Reranker](https://github.com/mitanshu-2004/MiniRag-Reranker)** is hybrid retrieval over industrial-safety PDFs. I caught that the original eval reused the training questions and rebuilt it around a disjoint held-out set with NDCG, MRR, and Recall@k.
+- **[llm-survival-churn](https://github.com/mitanshu-2004/llm-survival-churn)** is a Cox survival model whose real contribution was a leakage decomposition. Most of the headline lift re-encoded the label, so I kept the roughly +0.14 that actually looks forward and added a contract test to stop the leak coming back.
+- **[Chesstra](https://github.com/mitanshu-2004/chess)** is real-time multiplayer chess on Firestore with a versioned sync protocol and opponent-side end-state recovery. It is live at [chesstra.vercel.app](https://chesstra.vercel.app).
 
-[**RAG-assistant**](https://github.com/mitanshu-2004/RAG-assistant) — Llama 3.3 70B over policy documents with Pydantic-enforced structured output. The schema's `model_validator` rejects "Fully Answered" responses with empty citations. 0 hallucinations on the 9-question eval.
+## Stack
 
-[**Churn / RetainIQ**](https://github.com/mitanshu-2004/Churn) — Cox proportional hazards survival model on Steam reviews, augmented with six LLM-extracted risk signals. 5-fold CV C-index 0.60 → 0.87.
+`C++` `Python` `TypeScript` · ROS 2, ros2_control, MoveIt, real-time Linux, Elite CS SDK, Franka libfranka · PyTorch, Unsloth, PEFT and LoRA (rsLoRA), Hugging Face · FastAPI, ChromaDB, Sentence-Transformers, Pydantic · lifelines, scikit-learn, XGBoost · Next.js, React, Firestore
 
-[**Primetrade-Analysis**](https://github.com/mitanshu-2004/Primetrade-Analysis) — K-Means trader segmentation with a Fear & Greed sentiment overlay. PCA scatter, per-cluster radar charts, win-rate and PnL bars per sentiment regime.
+## Reach me
 
-[**chess**](https://github.com/mitanshu-2004/chess) ([chesstra.vercel.app](https://chesstra.vercel.app)) — multiplayer chess on Firestore with version-counter dedup, presence heartbeat, throttled timer writes, and a separate Stockfish backend.
+Portfolio [mitanshu.me](https://mitanshu.me) · Email mitanshug2004@gmail.com · [LinkedIn](https://linkedin.com/in/mitanshugoel)
 
-[**portfolio**](https://github.com/mitanshu-2004/portfolio) ([mitanshu.me](https://mitanshu.me)) — Next.js 15 with a Groq-backed chatbot grounded against `lib/knowledge.ts`. Multi-key client that parks rate-limited keys per Groq's 429 hint.
-
-## Looking for
-
-Full-time Robotics SWE, Research Engineering, ML Engineering, or Applied / Foundation-Model AI roles starting June 2026. Internships and short contracts available immediately. Open to relocation.
-
-[mitanshu.me](https://mitanshu.me) · [LinkedIn](https://linkedin.com/in/mitanshugoel) · [Hugging Face](https://huggingface.co/mitanshugoel) · mitanshug2004@gmail.com
+Open to full-time roles in Physical AI, Robotics SWE, ML Engineering, and Research Engineering. Based in Delhi, open to relocation.
