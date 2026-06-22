@@ -1,51 +1,37 @@
-<!--
-  GITHUB PROFILE README (paste-ready)
-  ===================================
-  Where this goes: the special repo github.com/mitanshu-2004/mitanshu-2004
-  (same name as your username). Put this content in its README.md, on the
-  default branch. It renders at the top of your GitHub profile.
-
-  Recommended pinned repos (set these in Profile > Customize your pins).
-  Recruiters click through pins, so these are your strongest, non-liability repos:
-    1. atom-robotics-lab/Hexapod   (your ROS 2 control node + ros2_control work)
-    2. RAG-assistant               (Pydantic-guarded, 0 hallucinations on the eval)
-    3. MiniRag-Reranker            (rebuilt the eval after catching leakage)
-    4. llm-survival-churn          (leakage decomposition)
-    5. chess                       (live multiplayer, chesstra.vercel.app)
-    6. Stock-Influence             (deployed full-stack, live demo)
-  Do NOT pin StockMetrics or memory-assistant as headline proof (known caveats).
-
-  Everything below this comment is the README. Delete this comment block if you want.
--->
 
 # Mitanshu Goel
 
-Robotics and Physical AI engineer. ECE new-grad from MAIT Delhi (2026). Most of my work sits where hardware meets learned models, with one habit underneath it: build the eval before you trust the number.
+**Robotics & Physical AI Engineer.** I build VR teleoperation, real-time robot control, and the robot-learning
+data pipelines behind them. I also build RAG/LLM systems and ML I can defend, where the eval comes before the number.
 
-Right now I am at **nFerent.ai**, building a bimanual VR teleoperation rig and the data pipeline around it. A Meta Quest 3 drives a pair of Elite Robots CS66 arms through a real-time C++ control loop, and the same loop extends to a Franka Research 3 so it covers both arm families. The rig is also how the data gets made: every session records synchronised arm state, headset pose, and multi-camera RGB-D as episodes for imitation learning, and a separate capture tool puts two MANUS gloves and three RealSense cameras on one hardware clock.
+🌐 [mitanshu.me](https://mitanshu.me) · 💼 [LinkedIn](https://linkedin.com/in/mitanshugoel) · ✉️ mitanshug2004@gmail.com
 
-## What I work on
+B.Tech ECE (minor in AI & ML), 2026. I just finished a robotics + physical-AI internship: VR teleoperation on real
+Elite CS66 and Franka FR3 arms, multi-sensor capture, and an imitation-learning dataset. Open to Robotics Software,
+Physical AI, and ML roles (India / India-friendly remote).
 
-- **Real-time robotics.** C++ control loops on industrial arms (SCHED_FIFO, memory locked, CPU pinned), ROS 2 and ros2_control, MoveIt, Cartesian servoing, VR teleoperation, inverse kinematics, and the safety stacks that keep an arm from hurting itself.
-- **Robot-learning data.** Multi-sensor capture synchronised on one hardware clock, with a watchdog that catches the quiet failures, like a camera silently repeating a frame under load.
-- **Foundation models.** Continued pretraining on a Reddit corpus I scraped and cleaned myself, including a distributed training loop I wrote by hand that resumes from the exact token after a dropped cloud session.
-- **Applied ML and LLMs.** Retrieval with held-out evaluation, Pydantic-guarded grounded Q&A, survival analysis, and a few honest failure write-ups.
+---
 
-## Selected projects
+### Selected projects
 
-- **Bimanual VR teleoperation (nFerent.ai)** is a real-time C++ stack that drives two Elite CS66 arms, extended to a Franka FR3, with One-Euro filtering, SE(3) smoothing, and singularity and step-cap guards. Company work, no public repo.
-- **[RAG-assistant](https://github.com/mitanshu-2004/RAG-assistant)** is grounded policy Q&A where a Pydantic validator rejects answers that claim completeness without citations, at parse time. It returned 0 hallucinations on a 9-question held-out rubric.
-- **[MiniRag-Reranker](https://github.com/mitanshu-2004/MiniRag-Reranker)** is hybrid retrieval over industrial-safety PDFs. I caught that the original eval reused the training questions and rebuilt it around a disjoint held-out set with NDCG, MRR, and Recall@k. Measured that way the learned reranker did not clearly beat the plain hybrid baseline, and the corrected eval is the point.
-- **[llm-survival-churn](https://github.com/mitanshu-2004/llm-survival-churn)** is a Cox survival model whose real contribution is a leakage decomposition. Most of the headline C-index lift re-encoded the label, so I kept the roughly +0.14 that actually looks forward and added a contract test to stop the leak coming back.
-- **[Hexapod](https://github.com/atom-robotics-lab/Hexapod)** is an 18-DoF hexapod in ROS 2 and Gazebo, built with A.T.O.M. Robotics. I worked on the control side: the tripod-gait and analytic-IK node, the ros2_control hardware interface, and the launch wiring. The URDF is CAD-exported. Team project, simulation only.
-- **[Chesstra](https://github.com/mitanshu-2004/chess)** is real-time multiplayer chess on Firestore with a versioned sync protocol and opponent-side end-state recovery. It is live at [chesstra.vercel.app](https://chesstra.vercel.app).
+| Project | What it is |
+|---|---|
+| [**RAG-assistant**](https://github.com/mitanshu-2004/RAG-assistant) | Grounded policy Q&A (Llama 3.3 70B) that abstains when retrieval comes back empty, enforces a citation on every answer through a Pydantic contract, and retries on invalid output. 0 hallucinations / 8-of-9 answerability on a held-out rubric. |
+| [**llm-survival-churn**](https://github.com/mitanshu-2004/llm-survival-churn) | Cox proportional-hazards churn study on ~10K Steam reviews. The real result was a leakage audit that cut a flashy +0.26 C-index gain down to an honest +0.14, guarded by a contract test. |
+| [**MiniRag-Reranker**](https://github.com/mitanshu-2004/MiniRag-Reranker) | Hybrid PDF retrieval (dense + BM25, 2,570 chunks) with score-gated abstention on FastAPI. After catching train/test leakage I rebuilt the eval on a disjoint held-out set, scored at the document level so a retriever can't game it. |
+| [**chess (Chesstra)**](https://github.com/mitanshu-2004/chess) · [live](https://chesstra.vercel.app) | React 19 browser chess with a Firestore multiplayer sync protocol: versioned idempotent writes, heartbeat presence, throttled clock writes, opponent-side end-state recovery. |
+| **Reddit continued-pretraining** · [models](https://huggingface.co/mitanshugoel) | Trained a small transformer from scratch and QLoRA-fine-tuned Qwen2.5-3B with a custom two-GPU (DDP) loop: token-offset sharding and checkpoint resume by token budget across Colab/Kaggle sessions. |
+| [**Hexapod**](https://github.com/atom-robotics-lab/Hexapod) (team) | 18-DOF hexapod in ROS 2 + Gazebo. My part: the tripod-gait controller (/cmd_vel to per-leg foot targets) and the analytic law-of-cosines leg inverse-kinematics. |
 
-## Stack
+---
 
-`C++` `Python` `TypeScript` · ROS 2, ros2_control, MoveIt, real-time Linux, Elite CS SDK, Franka libfranka · PyTorch, Unsloth, PEFT and LoRA (rsLoRA), accelerate (DDP), Hugging Face · FastAPI, ChromaDB, Sentence-Transformers, Pydantic · lifelines, scikit-learn, XGBoost · Next.js, React, Firestore
+### Tech
 
-## Reach me
+**Languages:** Python · C++ · JavaScript / TypeScript · SQL
+**Robotics:** ROS 2 · ros2_control · MoveIt · real-time C++ control · inverse kinematics · SE(3) transforms · VR teleoperation (Quest 3) · RealSense / RGB-D · multi-sensor sync · LeRobot · Gazebo
+**ML / LLM:** PyTorch · RAG (hybrid retrieval) · QLoRA / PEFT · sentence-transformers · ChromaDB · YOLOv8 · OpenCV · scikit-learn · lifelines (survival analysis) · held-out evaluation
+**Tools:** FastAPI · SQLite (FTS5) · Hugging Face Hub · Git · Linux
 
-Portfolio [mitanshu.me](https://mitanshu.me) · Email mitanshug2004@gmail.com · [LinkedIn](https://linkedin.com/in/mitanshugoel)
-
-Open to full-time roles in Physical AI, Robotics SWE, ML Engineering, and Research Engineering. Based in Delhi, open to roles across India and remote roles that work with India hours.
+<!-- Optional GitHub stats widget — uncomment to show:
+![Mitanshu's GitHub stats](https://github-readme-stats.vercel.app/api?username=mitanshu-2004&show_icons=true&hide_border=true)
+-->
